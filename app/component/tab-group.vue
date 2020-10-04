@@ -15,9 +15,9 @@
       <li v-for="tab in tabGroup.tabs">
 
         <span class="tab-actions">
-          <a href="#" class="remove" @click="removeTab(tab)" title="Remove tab">
+          <button class="remove" @click="removeTab(tab)" title="Remove tab">
             ×
-          </a>
+          </button>
           <Favicon :url="tab.url" class="favicon"/>
         </span>
 
@@ -78,10 +78,10 @@ export default {
 @import "../styles/settings";
 
 section {
-  opacity: 0.5;
+  opacity: 1;
   margin-bottom: $size-unit * 2.5;
   padding: $size-unit * 2;
-  border-radius: 2px;
+  border-radius: 10px;
 
   [data-theme="dark"] & {
     background: $color-primary-dark + 20;
@@ -92,7 +92,7 @@ section {
   }
 
   & { transition: all 250ms ease; }
-  &:hover { opacity: 1 }
+  &:hover { border: 1px solid #c96cf8 }
 }
 
 header {
@@ -117,7 +117,7 @@ h2 {
 
 time {
   font-size: $font-size-small;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .actions {
@@ -130,11 +130,13 @@ ul {
     font-size: $font-size-small;
     margin-bottom: $size-unit/2;
 
-    a {
+    button {
       .url {
-        opacity: 0.5;
+        opacity: 0.7;
         font-size: $font-size-small;
       }
+      margin: 0px;
+      padding: 0px;
     }
 
     .tab-actions {

@@ -1,5 +1,9 @@
 <template lang="html">
   <section>
+    <button href="#" @click="tidy('current')">
+      <span>Collect Current Tab</span>
+    </button>
+
     <button href="#" @click="tidy">
       <span v-if="tabCount">Tidy {{ tabCount }} {{ tabCount | pluralize('tab') }}</span>
       <span v-else>Nothing to tidy!</span>
@@ -9,7 +13,6 @@
       <a href="#" @mouseover="setMessage('Tidy to the left of current tab')" title="Tidy to the left of current tab" @click="tidy('left')">Left</a>
       <a href="#" @mouseover="setMessage('Tidy to the right of current tab')" title="Tidy to the right of current tab" @click="tidy('right')" >Right</a>
       <a href="#" @mouseover="setMessage('Tidy all but current tab')" title="Tidy all but current tab" @click="tidy('allButCurrent')">All else</a>
-      <a href="#" @mouseover="setMessage('Tidy current tab')" title="Tidy current tab" @click="tidy('current')" >Current</a>
     </div>
 
     <a @click='viewDashboard' class="dashboard">
@@ -21,14 +24,14 @@
 
 <script>
 import ChromePromise from 'chrome-promise'
-import { shouldTidy } from '../../lib/helpers.js'
+import { shouldTidy, tidy } from '../../lib/helpers.js'
 const chromep = new ChromePromise()
 
 export default {
 
   methods: {
-
     async tidy (which) {
+      console.log('tidy', which)
       const window = await chromep.windows.getCurrent({})
       chrome.runtime.sendMessage({
         message: 'tidy',
@@ -78,7 +81,7 @@ export default {
 @import '../styles/colors';
 @import '../styles/settings';
 
-$buttonwidth: 320px;
+$buttonwidth: 300px;
 
 section {
   text-align: center;
@@ -103,7 +106,7 @@ a, a:visited, a:hover, a:active {
 .button-group {
   a, a:visited, a:active {
     color: $color-primary-dark;
-    width: 80px;
+    width: 100px;
   }
 }
 </style>

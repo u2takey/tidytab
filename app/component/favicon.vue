@@ -51,7 +51,7 @@ export default {
   asyncComputed: {
     async blobUrl () {
       // Is it already a favicon?
-      if (this.url.startsWith('data:image/jpeg')) {
+      if (this.url && this.url.startsWith('data:image/jpeg')) {
         return this.url
       }
 
